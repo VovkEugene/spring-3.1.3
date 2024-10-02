@@ -1,0 +1,52 @@
+<div th:fragment="edit-modal" class="modal fade" tabindex="-1" id="edit-user-modal">
+    <div class="modal-dialog">
+        <form class="modal-content" id="edit-form"
+              th:action="@{/edit-form(id=${user.getId()})}" th:object="${user}" method="post">
+            <div class="modal-header d-flex justify-content-between">
+                <h5 class="modal-title">Edit user</h5>
+                <button type="button" class="close border-0 bg-transparent" data-bs-dismiss="modal" aria-label="Close">
+                    &#x2715;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container w-50 pb-2 text-center font-weight-bold">
+                    <div class="mb-3">
+                        <label for="id">ID</label>
+                        <input readonly th:field="*{id}" type="number" class="form-control readonly"
+                               id="id" name="id" autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">Username</label>
+                        <input th:field="*{username}" type="text" class="form-control"
+                               id="firstName" placeholder="Enter first name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input th:field="*{email}" type="email" class="form-control"
+                               id="email" placeholder="Enter email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input th:field="*{password}" type="password" class="form-control"
+                               id="password" placeholder="Enter password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <div>
+                            <select th:field="*{roles}" class="form-control" size="2" id="role">
+                                <option th:each="role : ${roles}"
+                                        th:value="${role.id}"
+                                        th:text="${role.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="edit-form">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<nav th:fragment="sidebar" class="col-md-2 d-none d-md-block sidebar py-4 px-0"
+     xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" href="admin-page">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user-page">User</a>
+            </li>
+        </ul>
+    </div>
+</nav>

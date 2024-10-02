@@ -1,0 +1,49 @@
+<div th:fragment="delete-modal" class="modal fade" tabindex="-1" id="delete-user-modal">
+    <div class="modal-dialog">
+        <form th:action="@{/delete(id=${user.getId()})}" method="get" th:object="${user}"
+              class="modal-content">
+            <div class="modal-header d-flex justify-content-between">
+                <h5 class="modal-title">Edit user</h5>
+                <button type="button" class="close border-0 bg-transparent" data-bs-dismiss="modal" aria-label="Close">
+                    &#x2715;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container w-50 pb-2 text-center font-weight-bold">
+                    <div class="mb-3">
+                        <label for="id">ID</label>
+                        <input readonly th:field="*{id}" type="number" class="form-control readonly"
+                               id="id" name="id" autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">Username</label>
+                        <input readonly th:field="*{username}" type="text" class="form-control readonly"
+                               id="firstName" placeholder="Enter first name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input readonly th:field="*{email}" type="email" class="form-control readonly"
+                               id="email" placeholder="Enter email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <div>
+                            <select th:field="*{roles}" class="form-control readonly" size="2" id="role">
+                                <option th:each="role : ${roles}"
+                                        th:value="${role.id}"
+                                        th:text="${role.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">
+                    Delete
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
