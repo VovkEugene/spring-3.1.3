@@ -26,16 +26,14 @@
                         <a th:attr="data-user-id=${user.getId()}"
                            class="btn btn-primary"
                            data-bs-toggle="modal"
-                           data-bs-target="#edit-user-modal">
-                            Edit
+                           data-bs-target="#edit-user-modal"> Edit
                         </a>
                     </td>
                     <td class="align-middle">
-                        <a th:attr="data-user-id=${user.getId()}"
+                        <a th:attr="data-user-id=${user.id}"
                            class="btn btn-danger"
                            data-bs-toggle="modal"
-                           data-bs-target="#delete-user-modal">
-                            Delete
+                           th:data-bs-target="${'#delete-modal' + user.id}">Delete
                         </a>
                     </td>
                 </tr>

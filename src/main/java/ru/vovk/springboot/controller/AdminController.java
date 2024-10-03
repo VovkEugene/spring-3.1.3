@@ -82,12 +82,8 @@ public class AdminController {
 //    }
 
 
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam("id") Long id, Model model) {
-        User user = userService.getUserById(id).orElseThrow();
-        Set<Role> roles = user.getRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
         return REDIRECT;
     }
