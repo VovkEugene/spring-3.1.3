@@ -1,8 +1,11 @@
 package ru.vovk.springboot.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +15,7 @@ import ru.vovk.springboot.service.RoleService;
 import ru.vovk.springboot.service.UserService;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,21 +28,16 @@ public class AdminController {
     private RoleService roleService;
 
     @GetMapping("/admin-page")
-    public String getAllUsers(Principal principal, Model model) {
-        String name = principal.getName();
-        User user = userService.getUserByUsername(name).orElseThrow();
-        model.addAttribute("user", user);
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
-        return "admin-page";
-    }
-
-    @GetMapping("/add-new-user")
-    public String getAddNewUserForm(Model model) {
+    public String getAllUsers(Authentication auth, ModelMap model) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        User user = userService.getUserByUsername(userDetails.getUsername()).orElseThrow();
         List<Role> roles = roleService.getAllRoles();
-        model.addAttribute("user", new User());
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("user", user);
+        model.addAttribute("users", users);
         model.addAttribute("roles", roles);
-        return "add-new-user";
+        model.addAttribute("newUser", new User());
+        return "admin-page";
     }
 
     @PostMapping("/add-new-user")
