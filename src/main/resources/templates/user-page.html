@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,9 +21,14 @@
             height: 92vh;
         }
 
-        .sidebar-sticky > .nav > li:nth-child(2) > a {
+        .highlight {
             background-color: #0d6efd;
             border-radius: 3px;
+            color: white;
+        }
+
+        .highlight:hover {
+            background-color: #0d6efd;
             color: white;
         }
 
