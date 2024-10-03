@@ -43,26 +43,12 @@ public class AdminController {
         return REDIRECT;
     }
 
-    @GetMapping("/edit-form")
-    public String updateUserForm(@RequestParam("id") Long id, Model model) {
-        User user = userService.getUserById(id).orElseThrow();
-        List<Role> roles = roleService.getAllRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
-        return "edit-form";
-    }
-
     @PostMapping("/edit-form")
-    public String editUser(
-            @RequestParam("id") Long id,
-            @RequestParam("username") String username,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password,
-            @RequestParam("roles") Set<Role> roles,
-            Model model) {
-        List<Role> showRoles = roleService.getAllRoles();
-        model.addAttribute("roles", showRoles);
-        User user = userService.getUserById(id).orElseThrow();
+    public String editUser(@RequestParam("id") Long id,
+                           @RequestParam("username") String username,
+                           @RequestParam("email") String email,
+                           @RequestParam("password") String password,
+                           @RequestParam("roles") Set<Role> roles) {
         userService.updateUser(id, username, email, password, roles);
         return REDIRECT;
     }
