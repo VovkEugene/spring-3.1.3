@@ -14,9 +14,6 @@ import ru.vovk.springboot.model.User;
 import ru.vovk.springboot.service.RoleService;
 import ru.vovk.springboot.service.UserService;
 
-import java.security.Principal;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -69,18 +66,6 @@ public class AdminController {
         userService.updateUser(id, username, email, password, roles);
         return REDIRECT;
     }
-//
-//    @PostMapping("/edit-form")
-//    public String updateUser(@RequestParam("id") Long id,
-//                             User user) {
-//        userService.updateUser(id,
-//                user.getUsername(),
-//                user.getEmail(),
-//                user.getPassword(),
-//                user.getRoles());
-//        return REDIRECT;
-//    }
-
 
     @PostMapping("/delete")
     public String deleteUser(@RequestParam("id") Long id) {
