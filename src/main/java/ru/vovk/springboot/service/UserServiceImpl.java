@@ -69,10 +69,7 @@ public class UserServiceImpl implements UserService {
         maybeUser.setPassword(passwordEncoder.encode(password));
         maybeUser.setEmail(email);
         maybeUser.setCreateDate(maybeUser.getCreateDate());
-        Set<Role> newRoles = maybeUser.getRoles();
-        newRoles.addAll(roles);
-
-        maybeUser.setRoles(newRoles);
+        maybeUser.setRoles(roles);
         userRepository.save(maybeUser);
     }
 
